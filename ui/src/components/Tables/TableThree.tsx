@@ -1,4 +1,3 @@
-import { BRAND } from "@/types/brand";
 import Image from "next/image";
 
 
@@ -12,7 +11,7 @@ const TableOne = () => {
 
       <div className="flex flex-col">
         <div role="tablist" className="tabs tabs-lifted">
-          <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="Verfied" checked />
+          <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="Verfied" />
           <div role="tabpanel" className="tab-content p-2">
           </div>
           <input type="radio" name="my_tabs_1" role="tab" className="tab" aria-label="Pending" />
