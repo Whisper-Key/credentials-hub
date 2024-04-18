@@ -17,7 +17,10 @@ export const metadata: Metadata = {
 const VerifiersPage = () => {
   return (
     <DefaultLayout>
-      <ZkShield 
+      <ZkShield mainContainerClassName="min-h-screen"
+      innerContainerClassName="hero-content text-center"
+      selectProviderClassName="selectProviderContainer"
+      headerClassName="shieldHeader"
             ignoreConnectForTesting={false}
             localAccount='EKEnaPrfADEKKPAV5AT57sjD22qRQ7cuxEPGW9LafMwd638R2EUH'
             autoLaunch={true}

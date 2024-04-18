@@ -241,3 +241,32 @@ input[type="search"]::-webkit-search-cancel-button {
 [x-cloak] {
     display: none !important;
 }
+
+.selectProviderContainer ul {
+    list-style-type: none;
+  }
+  .selectProviderContainer ul li {
+    list-style-type: none;
+    margin: 20px 0 20px 0;
+    padding: 20px 10px 20px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(28 36 52 / var(--tw-bg-opacity))
+  }
+  
+  .shieldHeader {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 20px;
+  }
+
+  .selectProviderContainer h1, .zkshield-select-network-container h1 {
+    font-weight: bold;
+    font-size: xx-large;
+  }
+
+  .zkshield-select-network-container h1 {
+    margin-bottom: 20px;
+  }
