@@ -7,7 +7,9 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { ZkShield } from "zkshield";
 import ECommerce from "@/components/Dashboard/E-commerce";
-import CredentialsList from "@/components/WhisperKey/Credentials/CredentialsList";
+import BlueprintForm from "@/components/WhisperKey/Blueprints/BlueprintForm";
+import BlueprintDisplay from "@/components/WhisperKey/Blueprints/BlueprintDisplay";
+import CredentialDisplay from "@/components/WhisperKey/Credentials/CredentialDisplay";
 
 export const metadata: Metadata = {
   title: "Credentials | Whisper Key",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
     "This is the Credentials page for Whisper Key",
 };
 
-const CredentialsPage = () => {
+const CreateBlueprintPage = () => {
   return (
     <DefaultLayout>
       <ZkShield mainContainerClassName="min-h-screen"
@@ -26,15 +28,16 @@ const CredentialsPage = () => {
             localAccount='EKEnaPrfADEKKPAV5AT57sjD22qRQ7cuxEPGW9LafMwd638R2EUH'
             autoLaunch={true}
           >
-               <Breadcrumb pageName="Credentials" />
+            <div className="mx-auto max-w-242.5">
+               <Breadcrumb pageName="Display Credential" previousPage="Credentials" previousPageLink="credentials"  />
 
 <div className="flex flex-col gap-10">
-  <CredentialsList />
+  <CredentialDisplay />
 </div>
-
+</div>
       </ZkShield>
     </DefaultLayout>
   );
 };
 
-export default CredentialsPage;
+export default CreateBlueprintPage;
