@@ -204,7 +204,8 @@ const CredentialIssueDetail: React.FC<CredentialFormProps> = ({ credentialMetada
 
   return (
     <div className='grid grid-cols-1 space-y-6'>
-      <h2 className='text-2xl font-bold sm:text-2xl'>Verifiable Credential Details</h2>
+      <div className='divider'></div>
+      <h2 className='text-2xl font-bold sm:text-2xl'>Credential Details</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-control">
           <label className="label">

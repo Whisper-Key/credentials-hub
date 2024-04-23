@@ -11,6 +11,7 @@ const CredentialDisplay = () => {
     const router = useRouter();
     const [created, setCreated] = useState({
         currentCredential: null as any | null,
+        state: null as string | null,
     });
     const address = "B62qoQDqsgFc7aEToXe4wjxTeNCeNmzESXFiPd3sYs1MD7oZbyiPYEg";
     const searchParams = useSearchParams();
@@ -22,15 +23,18 @@ const CredentialDisplay = () => {
 
             const name = searchParams.get('name');
             const address = searchParams.get('address');
+            const state = searchParams.get('state');
+
+            if(state === 'pending') {
       
-            const apiURL = `${process.env.NEXT_PUBLIC_CREDENTIALS_API}/${name}/${address}`;
+            const apiURL = `${process.env.NEXT_PUBLIC_CREDENTIALS_API}/owned/pending/${name}/${address}`;
 
             const requestHeaders = { "Content-Type": "application/json" };
             axios.get(apiURL)
                 .then(function (response) {
                     // handle success
                     console.log("Get Credentials created - Success");
-                    setCreated({ ...created, currentCredential: response!.data! });
+                    setCreated({ ...created, currentCredential: response!.data!.credential, state: state });
 
                     console.log("created Credential:" + response!.data!);
                 })
@@ -41,6 +45,26 @@ const CredentialDisplay = () => {
                 .finally(function () {
                     // always executed
                 });
+            } else {
+                const apiURL = `${process.env.NEXT_PUBLIC_CREDENTIALS_API}/named/${name}/${address}`;
+
+                const requestHeaders = { "Content-Type": "application/json" };
+                axios.get(apiURL)
+                    .then(function (response) {
+                        // handle success
+                        console.log("Get Credentials created - Success");
+                        setCreated({ ...created, currentCredential: response!.data!, state: state });
+    
+                        console.log("created Credential:" + response!.data!);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .finally(function () {
+                        // always executed
+                    });
+            }
 
         })();
 
@@ -54,7 +78,7 @@ const CredentialDisplay = () => {
                 <div className=''>
                 <div className="" id="">
                     <div className="">
-                        <h2 className="text-2xl font-bold sm:text-2xl">{created.currentCredential.credentialType}</h2><br />
+                        <h2 className="text-2xl font-bold sm:text-2xl">{created.state == 'pending' && <span>Pending:</span> } {created.currentCredential.credentialType} Credential</h2><br />
                         {Object.keys(created.currentCredential)
                             .filter(key => !excludeKeys.includes(key))
                             .map(key => (

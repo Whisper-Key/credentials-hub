@@ -64,7 +64,7 @@ const CredentialIssue = () => {
 
   return (
 
-    <div className="">
+        <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
 
       <div className=''>
         <div className="" id="">
@@ -73,13 +73,13 @@ const CredentialIssue = () => {
              
               <div>
 
-                <h2 className='text-2xl font-bold sm:text-2xl'>Choose a Verifiable Credential</h2>
+                <h2 className='text-2xl font-bold sm:text-2xl'>Choose a Credential</h2>
 
                 <div className="form-control">
                   <label className="label">
                     <span className="text-base label-text vc-fieldName"></span>
                   </label>
-                  <select className="select select-bordered w-full max-w-xs"
+                  <select className="select select-bordered w-full max-w-xs "
                     onChange={handleSelectChange}>
                     <option>Select a Credential</option>
                     {credentialMetaDataList.map((vc, index) => (
