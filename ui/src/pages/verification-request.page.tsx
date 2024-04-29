@@ -7,33 +7,36 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { ZkShield } from "zkshield";
 import ECommerce from "@/components/Dashboard/E-commerce";
+import BlueprintForm from "@/components/WhisperKey/Blueprints/BlueprintForm";
+import CredentialIssue from "@/components/WhisperKey/Credentials/CredentialIssue";
 
 export const metadata: Metadata = {
-  title: "Verifiers | Whisper Key",
+  title: "Credentials | Whisper Key",
   description:
-    "This is the Verifiers page for Whisper Key",
+    "This is the Credentials page for Whisper Key",
 };
 
-const VerifiersPage = () => {
+const CreateBlueprintPage = () => {
   return (
     <DefaultLayout>
       <ZkShield mainContainerClassName="min-h-screen"
       innerContainerClassName="hero-content text-center"
       selectProviderClassName="selectProviderContainer"
       headerClassName="shieldHeader"
-            ignoreConnectForTesting={false}
+            ignoreConnectForTesting={true}
             localAccount='EKEnaPrfADEKKPAV5AT57sjD22qRQ7cuxEPGW9LafMwd638R2EUH'
             autoLaunch={true}
           >
-               <Breadcrumb pageName="Verifiers" />
+            <div className="mx-auto max-w-242.5">
+               <Breadcrumb pageName="Issue Credential" previousPage="Credentials" previousPageLink="credentials"  />
 
 <div className="flex flex-col gap-10">
-  <TableThree />
+  <CredentialIssue />
 </div>
-
+</div>
       </ZkShield>
     </DefaultLayout>
   );
 };
 
-export default VerifiersPage;
+export default CreateBlueprintPage;

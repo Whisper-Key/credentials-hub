@@ -170,12 +170,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
               {/* <!-- Menu Item Credentials --> */}
 
-{/* <!-- Menu Item Verifiers --> */}
+{/* <!-- Menu Item verifications --> */}
 <li>
                 <Link
-                  href="/verifiers"
+                  href="/verifications"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes("verifiers") && "bg-graydark dark:bg-meta-4"
+                    pathname.includes("verifications") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -183,10 +183,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 </svg>
 
 
-                  Verifiers
+Verifications
                 </Link>
               </li>
-              {/* <!-- Menu Item Verifiers --> */}
+              {/* <!-- Menu Item Verifications --> */}
 
               {/* <!-- Menu Item Blueprints --> */}
               <li>
