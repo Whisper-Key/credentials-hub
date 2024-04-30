@@ -10,6 +10,7 @@ import ECommerce from "@/components/Dashboard/E-commerce";
 import BlueprintForm from "@/components/WhisperKey/Blueprints/BlueprintForm";
 import BlueprintDisplay from "@/components/WhisperKey/Blueprints/BlueprintDisplay";
 import CredentialDisplay from "@/components/WhisperKey/Credentials/CredentialDisplay";
+import VerififcationDisplay from "@/components/WhisperKey/Verifications/VerififcationDisplay";
 
 export const metadata: Metadata = {
   title: "Credentials | Whisper Key",
@@ -29,10 +30,10 @@ const CreateBlueprintPage = () => {
             autoLaunch={true}
           >
             <div className="mx-auto max-w-242.5">
-               <Breadcrumb pageName="Display Credential" previousPage="Credentials" previousPageLink="credentials"  />
+               <Breadcrumb pageName="Display Verification" previousPage="Verifications" previousPageLink="verifications"  />
 
 <div className="flex flex-col gap-10">
-  <CredentialDisplay />
+  <VerififcationDisplay />
 </div>
 </div>
       </ZkShield>

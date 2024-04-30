@@ -8,6 +8,7 @@ import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { ZkShield } from "zkshield";
 import ECommerce from "@/components/Dashboard/E-commerce";
 import VerificationsList from "@/components/WhisperKey/Verifications/VerificationsList";
+import VerificationTemplatesList from "@/components/WhisperKey/Verifications/VerificationTemplatesList";
 
 export const metadata: Metadata = {
   title: "Verifiers | Whisper Key",
@@ -26,10 +27,10 @@ const VerificationsPage = () => {
             localAccount='EKEnaPrfADEKKPAV5AT57sjD22qRQ7cuxEPGW9LafMwd638R2EUH'
             autoLaunch={true}
           >
-               <Breadcrumb pageName="Verifications" />
+               <Breadcrumb pageName="Verfification Templates" previousPage="Verifications" previousPageLink="verifications"/>
 
 <div className="flex flex-col gap-10">
-  <VerificationsList />
+  <VerificationTemplatesList />
 </div>
 
       </ZkShield>

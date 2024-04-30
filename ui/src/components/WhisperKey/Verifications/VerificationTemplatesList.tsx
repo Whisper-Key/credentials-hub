@@ -7,7 +7,7 @@ import Router from "next/router";
 import { AddressExtensions } from "@/modules/AddressExtensions";
 
 
-const VerificationsList = () => {
+const VerificationTemplatesList = () => {
 
   const [verifications, setVerifications] = useState([]);
 
@@ -16,7 +16,7 @@ const VerificationsList = () => {
   useEffect(() => {
 
     (async () => {
-        const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/api/verifications/${address}`;
+        const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/api/verifications/templates/${address}`;
 
         let result = [];
         try {
@@ -37,8 +37,7 @@ const navigateToVerification = (credential: any) => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="mb-6 flex gap-4 justify-end">
-        <Link href='verification-request' className="btn btn-sm btn-primary">Request Verification</Link>
-        <Link href='verification-templates' className="btn btn-sm btn-accent">Verification Templates</Link>
+        <Link href='verification-template-create' className="btn btn-sm btn-primary">Create Template</Link>
       </div>
 
       <div className="flex flex-col">
@@ -50,11 +49,10 @@ const navigateToVerification = (credential: any) => {
             <thead>
               <tr>
                 <th></th>
-                <th>Owner</th>
-                <th>Type</th>
-                <th>Template</th>
-                <th>Status</th>
-                <th>Date</th>
+                <th>Template Name</th>
+                <th>Issuer</th>
+                <th>Credential Type</th>
+                <th>Created Date</th>
               </tr>
             </thead>
             <tbody>
@@ -62,11 +60,10 @@ const navigateToVerification = (credential: any) => {
               {verifications.map((verification: any, index: number) => (
                         <tr key={index} onClick={() => navigateToVerification(verification!)} style={{cursor: "pointer"}}>
                           <th>{index + 1}</th>
-                            <td>{AddressExtensions.getShortAddress(verification.owner)}</td>
-                            <td>{verification.template.credentialType}</td>
-                            <td>{verification.template.name}</td>
-                            <td>{verification.status}</td>
-                            <td>{new Date(verification.verificationDate.seconds * 1000).toISOString()}</td>
+                          <td>{verification.name}</td>
+                            <td>{AddressExtensions.getShortAddress(verification.issuer)}</td>
+                            <td>{verification.credentialType}</td>
+                           {/* <td>{new Date(verification.created.seconds * 1000).toISOString()}</td> */}
                         </tr>
                     ))}
             </tbody>
@@ -78,4 +75,4 @@ const navigateToVerification = (credential: any) => {
   );
 };
 
-export default VerificationsList;
+export default VerificationTemplatesList;

@@ -7,15 +7,18 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { ZkShield } from "zkshield";
 import ECommerce from "@/components/Dashboard/E-commerce";
-import VerificationsList from "@/components/WhisperKey/Verifications/VerificationsList";
+import BlueprintForm from "@/components/WhisperKey/Blueprints/BlueprintForm";
+import CredentialIssue from "@/components/WhisperKey/Credentials/CredentialIssue";
+import VerificationRequest from "@/components/WhisperKey/Verifications/VerificationRequest";
+import VerificationTemplateCreate from "@/components/WhisperKey/Verifications/VerificationTemplateCreate";
 
 export const metadata: Metadata = {
-  title: "Verifiers | Whisper Key",
+  title: "Credentials | Whisper Key",
   description:
-    "This is the Verifiers page for Whisper Key",
+    "This is the Credentials page for Whisper Key",
 };
 
-const VerificationsPage = () => {
+const CreateBlueprintPage = () => {
   return (
     <DefaultLayout>
       <ZkShield mainContainerClassName="min-h-screen"
@@ -26,15 +29,16 @@ const VerificationsPage = () => {
             localAccount='EKEnaPrfADEKKPAV5AT57sjD22qRQ7cuxEPGW9LafMwd638R2EUH'
             autoLaunch={true}
           >
-               <Breadcrumb pageName="Verifications" />
+            <div className="mx-auto max-w-242.5">
+               <Breadcrumb pageName="Create Verification Template" previousPage="Verifications" previousPageLink="verifications"  />
 
 <div className="flex flex-col gap-10">
-  <VerificationsList />
+  <VerificationTemplateCreate />
 </div>
-
+</div>
       </ZkShield>
     </DefaultLayout>
   );
 };
 
-export default VerificationsPage;
+export default CreateBlueprintPage;

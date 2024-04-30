@@ -4,40 +4,19 @@ import { useEffect, useState, useContext, Component, ChangeEvent } from "react";
 import { AuthContext } from 'zkshield';
 import VerificationRequestDetail from './VerificationTemplateDetail';
 import QRCodeScanner from '../../QRCodeScanner';
-import Router from "next/router";
 
-const VerificationRequest = () => {
+const VerificationTemplateCreate = () => {
   const [selectedCredential, setSelectedCredential] = useState<any | null>(null);
-  const [owner, setOwner] = useState<any | null>(null);
   const [credentialMetaDataList, setCredentialMetaDataList] = useState<any[]>([]);
   const [authState, setAuthState] = useContext(AuthContext);
   const address = "B62qoQDqsgFc7aEToXe4wjxTeNCeNmzESXFiPd3sYs1MD7oZbyiPYEg";
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     const selectedCredentialObject = credentialMetaDataList.find(vc => vc.name === selectedValue);
+    selectedCredentialObject!.issuer = authState.userAddress;
     // Do something with the selectedCredentialObject, such as updating state
     setSelectedCredential(selectedCredentialObject || null);
   };
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedValue = e.target.value;
-    setOwner(selectedValue);
-  }
-
-  const requestVerification = (e: any) => {
-    const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/api/verifications/`;
-    const requestOptions: RequestInit = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-        // You can add other headers here if needed
-      },
-      body: JSON.stringify({ requestor: address, owner: owner, template: selectedCredential, status: 'pending'})
-    };
-    const response = fetch(apiUrl, requestOptions)
-      .then(response => response.json())
-      .then(data => Router.push('verifications'));
-  }
 
   useEffect(() => {
     // This will log the updated value after the state has been successfully updated
@@ -48,15 +27,15 @@ const VerificationRequest = () => {
     const fetchData = async () => {
       try {
         console.log('authState: ', authState);
-        const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/api/verifications/templates/${address}`;
+        const credsApi = `${process.env.NEXT_PUBLIC_CREDENTIALS_API}/all`;
 
-        console.log('credsAPi: ', apiUrl)
-        if (!apiUrl) {
+        console.log('credsAPi: ', credsApi)
+        if (!credsApi) {
           throw new Error('API URL not defined in environment variables.');
         }
         let result = [];
         try {
-          const response = await fetch(apiUrl);
+          const response = await fetch(credsApi);
           result = await response.json();
         } catch (error) {
           console.error('Error trying to fetch Credential Metadata', error);
@@ -64,7 +43,7 @@ const VerificationRequest = () => {
 
         let creds: any[] = result;
   
-        setCredentialMetaDataList(creds);
+        setCredentialMetaDataList([...new Set(creds)]);
       } catch (error) {
         console.error('Error trying to fetch Credential Metadata', error);
       }
@@ -79,10 +58,11 @@ const VerificationRequest = () => {
       <div className=''>
         <div className="" id="">
           <div className="">
+            <form className="">
              
               <div>
 
-                <h2 className='text-2xl font-bold sm:text-2xl'>Choose a Verification Template</h2>
+                <h2 className='text-2xl font-bold sm:text-2xl'>Choose a Credential</h2>
 
                 <div className="form-control">
                   <label className="label">
@@ -90,29 +70,18 @@ const VerificationRequest = () => {
                   </label>
                   <select className="select select-bordered w-full max-w-xs "
                     onChange={handleSelectChange}>
-                    <option>Select a Template</option>
+                    <option>Select a Credential</option>
                     {credentialMetaDataList.map((vc, index) => (
                       <option key={vc.name}>{vc.name}</option>
                     ))};
                   </select>
                 </div>
-                <div className="form-control">
-          <label className="label">
-            <span className="text-base label-text">Owner</span>
-          </label>
-          <div className="join">
-            <QRCodeScanner uniqueID="promote-form-scan" className="btn join-item" />
-            <input id='owner' name="owner" onChange={handleInputChange} className="input input-bordered join-item " />
-          </div>
-          {/* <input type="text" id="name" className="input input-bordered w-full max-w-xs" placeholder="Enter the address of the intended owner" /> */}
-        </div>
-        <div className='mt-6'>
-          <button type='submit' onClick={requestVerification} className="btn btn-primary">Request</button>
-        </div>
+
               </div>
+            </form>
             <br />
             <div>
-              
+              {selectedCredential !== null && (<VerificationRequestDetail credentialMetadata={selectedCredential}></VerificationRequestDetail>)}
             </div>
           </div>
           
@@ -125,4 +94,4 @@ const VerificationRequest = () => {
   );
 }
 
-export default VerificationRequest;
+export default VerificationTemplateCreate;
